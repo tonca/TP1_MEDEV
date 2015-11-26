@@ -26,6 +26,15 @@ int main() {
 
 void ecriture(vector< vector<int> >* image)
 {
+    
+    
+    
+    
+    
+    
+    
+    
+    
     ofstream fichier("PGM_out.pgm");
     
     fichier << "P2\n#\n";
