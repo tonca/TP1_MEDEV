@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void ecriture(vector<vector<int>>* image);
+void ecriture(vector<vector<int> >* image);
 /*
  Programme Traitement d'images PGM 
 */
@@ -29,9 +29,9 @@ void ecriture(vector< vector<int> >* image)
     ofstream fichier("PGM_out.pgm");
     
     fichier << "P2\n#\n";
-    fichier <<image->size()<<" "<<image[0]->size()<<endl;
+    fichier << image->size()<<" "<< image[0]->size()<<endl;
     
-    for(int i; i<image->size; i++){
+    for(int i; i<image->size; i++ ) {
         for(int j; j<image->size();j++){
             fichier << image[i][j];
         }
