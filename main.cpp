@@ -1,4 +1,5 @@
-/* 
+/* https://github.com/tonca/TP1_MEDEV.git
+ * 
  * File:   main.cpp
  * Author: eleve
  *
@@ -7,18 +8,36 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <exception>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
+void ecriture(vector<vector<int>>* image);
 /*
- Programme Hello World
- */
+ Programme Traitement d'images PGM 
+*/
 int main() {
-    cout << "Hello World !" << endl;
-
+    
+    ecriture(NULL);
+    
     return 0;
 }
 
-//TODO caca
-
+void ecriture(vector< vector<int> >* image)
+{
+    ofstream fichier("PGM_out.pgm");
+    
+    fichier << "P2\n#\n";
+    fichier <<image->size()<<" "<<image[0]->size()<<endl;
+    
+    for(int i; i<image->size; i++){
+        for(int j; j<image->size();j++){
+            fichier << image[i][j];
+        }
+        fichier<<endl;
+    }
+    fichier.close(); 
+    
+    return;
+}
