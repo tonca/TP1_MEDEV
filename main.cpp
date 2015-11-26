@@ -1,59 +1,83 @@
-/* https://github.com/tonca/TP1_MEDEV.git
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
  * File:   main.cpp
  * Author: eleve
  *
- * Created on 26 novembre 2015, 08:35
+ * Created on 26 novembre 2015, 09:48
  */
 
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
-#include <vector>
+#include<iostream>
+#include<fstream>
+#include<string>
 
 using namespace std;
 
-void ecriture(vector<vector<int> >* image);
-/*
- Programme Traitement d'images PGM 
-*/
-int main() {
-    
-    ecriture(NULL);
-    
-    return 0;
-}
+int** lecture(string nomdeGraphic){
+        string type; char a;
+        int height, width;
+        int maxvaleur;
+        
+        ifstream infile(nomdeGraphic, ios::in);
+        infile >> type >> a >> width >> height >> maxvaleur;
 
-void ecriture(vector< vector<int> >* image)
-{
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ofstream fichier("PGM_out.pgm");
-    
-    fichier << "P2\n#\n";
-    fichier << image->size()<<" "<< image[0]->size()<<endl;
-    
-    for(int i; i<image->size; i++ ) {
-        for(int j; j<image->size();j++){
-            fichier << image[i][j];
+        int **p = new int*[height];
+    for(int i = 0; i < height; i++)  
+        p[i] = new int[width];
+
+        for(int i = 0;i < height; i++)
+        {
+                for(int j = 0;j < width; j++)
+                {
+                        infile >> p[i][j];
+                //        cout << p[i][j] << " ";
+                }
+        //        cout << endl;
         }
-        fichier<<endl;
-    }
-    fichier.close(); 
-    
-    return;
+        return p;
 }
 
-void seuillage(){
-
-
+void ecriture(string nomdeEcriture,string type, char a, int **p, int height, int width, int maxvaleur){
+        fstream outfile(nomdeEcriture, ios::out);
+        outfile << type << endl << a << endl << width << " " << height << endl << maxvaleur << endl;
+        for(int i = 0;i < height; i++)
+        {
+                for(int j = 0;j < width; j++)
+                {
+                        outfile << p[i][j] << " ";
+                }
+                outfile << endl;
+        
+        }
 }
 
-//HOJOJHOHO
+void afficheHistogramme(int **p, int height, int width, int maxvaleur)
+{
+        int* histo = new int[maxvaleur];
+        for(int i = 0;i<maxvaleur;i++) histo[i] = 0;
+        for(int i = 0;i < height; i++)
+        {
+                for(int j = 0;j < width; j++)
+                {
+                        histo[p[i][j]]++;
+                }
+        }
+        for(int i = 0;i<maxvaleur;i++)
+        {
+                cout << i << ": " <<  histo[i] << endl;
+        }
+}
+
+int main(){
+        string readfile = "lena.pgm";
+        string wrotefile = "result.pgm";
+        int **p = lecture(readfile);
+        afficheHistogramme(p, 512, 512, 255);
+        ecriture(wrotefile, "P2", '#', p , 512, 512, 255);
+        return 0;
+}
+
