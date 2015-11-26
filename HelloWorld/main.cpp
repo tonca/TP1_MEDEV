@@ -80,3 +80,5 @@ int main(){
         ecriture(wrotefile, "P2", '#', p , 512, 512, 255);
         return 0;
 }
+
+kjhgh
