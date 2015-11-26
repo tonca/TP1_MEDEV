@@ -41,3 +41,8 @@ void ecriture(vector< vector<int> >* image)
     
     return;
 }
+
+void seuillage(){
+
+
+}
